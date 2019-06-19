@@ -1,51 +1,50 @@
-import React, {Component} from 'react';
-import {StyleSheet, TextInput, View, Button, Text} from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, TextInput, View, Button, Text } from "react-native";
 
 type Props = {};
 export default class App extends Component<Props> {
   state = {
-    placeName: '',
+    placeName: "",
     places: []
-
-  }
+  };
 
   placeNameChangeHandler = val => {
     this.setState({
       placeName: val
     });
-  }
+  };
 
-  placeButtonHander = () => {
-    if (this.state.placeName.trim() === '') {
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === "") {
       return;
     }
 
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       places: prevState.places.concat(prevState.placeName),
-      placeName: ''
+      placeName: ""
     }));
   };
-  
+
   render() {
-    
-    const placesOutput = this.state.places.map( (a, i) => 
+    const placesOutput = this.state.places.map((a, i) => (
       <Text key={i}>{a}</Text>
-    );
-    console.log(this.state.places);
-    console.log(placesOutput);
+    ));
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.placeInput} 
+          <TextInput
+            style={styles.placeInput}
             value={this.state.placeName}
             placeholder="An awesome place"
-            onChangeText={ e => this.placeNameChangeHandler(e)}></TextInput>
-          <Button style={styles.placeButton} title="Add" 
-            onPress={this.placeButtonHander}></Button>
+            onChangeText={e => this.placeNameChangeHandler(e)}
+          />
+          <Button
+            style={styles.placeButton}
+            title="Add"
+            onPress={this.placeSubmitHandler}
+          />
         </View>
-        <View>
-          {placesOutput}
-        </View>
+        <View style={styles.listContainer}>{placesOutput}</View>
       </View>
     );
   }
@@ -56,16 +55,20 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 26,
     justifyContent: "flex-start",
-    backgroundColor: '#F5FCFF',
+    backgroundColor: "#F5FCFF"
   },
   inputContainer: {
     flexDirection: "row",
-    justifyContent:"space-between"
+    justifyContent: "space-between"
   },
   placeInput: {
-   width: "70%"
+    width: "70%"
   },
   placeButton: {
     width: "30%"
   },
+  listContainer: {
+    width: "100%",
+    backgroundColor: "#AAA"
+  }
 });

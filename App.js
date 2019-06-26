@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, TextInput, View, Button, Text } from "react-native";
 
+import ListItem from "./src/components/ListItem";
+
 type Props = {};
 export default class App extends Component<Props> {
   state = {
@@ -27,7 +29,7 @@ export default class App extends Component<Props> {
 
   render() {
     const placesOutput = this.state.places.map((a, i) => (
-      <Text key={i}>{a}</Text>
+      <ListItem key={i} placeName={a} />
     ));
     return (
       <View style={styles.container}>

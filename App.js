@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, TextInput, View, Button, Text } from "react-native";
 
-import ListItem from "./src/components/ListItem";
+import PlaceList from "./src/components/PlaceList";
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -28,9 +28,7 @@ export default class App extends Component<Props> {
   };
 
   render() {
-    const placesOutput = this.state.places.map((a, i) => (
-      <ListItem key={i} placeName={a} />
-    ));
+    const { places } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -46,7 +44,7 @@ export default class App extends Component<Props> {
             onPress={this.placeSubmitHandler}
           />
         </View>
-        <View style={styles.listContainer}>{placesOutput}</View>
+        <PlaceList places={places} />
       </View>
     );
   }
